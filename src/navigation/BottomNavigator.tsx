@@ -29,7 +29,8 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
+    <Tab.Navigator
+      screenOptions={{ headerShown: false, tabBarShowLabel: false }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
