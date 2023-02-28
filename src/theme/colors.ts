@@ -6,6 +6,7 @@ export const palette = {
     heartSelected: "rgb(255, 48, 64)",
     surface: "#262626",
     surface10: "rgba(0, 0, 0, 0.1)",
+    facebook: "#3797EF",
 
     primary: "#4192EF",
     secondary: "#E0F1FF",
