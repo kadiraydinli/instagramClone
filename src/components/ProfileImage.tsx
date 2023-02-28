@@ -1,18 +1,24 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleProp, StyleSheet } from 'react-native';
+import { ImageStyle } from 'react-native-fast-image';
 import { palette } from 'theme';
 import Image from './Image';
 
 interface ProfileImageTypes {
-  url: string;
   size?: number;
+  style?: StyleProp<ImageStyle>;
 }
 
-const ProfileImage: React.FC<ProfileImageTypes> = ({ url, size }) => {
+const ProfileImage: React.FC<ProfileImageTypes> = ({ size, style }) => {
+  const url = 'https://picsum.photos/400';
   return (
     <Image
       url={url}
-      style={[styles.container, size ? { width: size, height: size } : {}]}
+      style={[
+        styles.container,
+        size ? { width: size, height: size } : {},
+        style,
+      ]}
     />
   );
 };

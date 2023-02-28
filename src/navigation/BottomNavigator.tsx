@@ -63,9 +63,7 @@ const BottomNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarIcon: () => (
-            <ProfileImage url="https://picsum.photos/2000" size={24} />
-          ),
+          tabBarIcon: () => <ProfileImage size={24} />,
         }}
       />
     </Tab.Navigator>
