@@ -10,10 +10,18 @@ import {
 } from 'react-native';
 import { palette, spacing } from 'theme';
 
-type InputType = 'default' | 'email' | 'password';
+type InputTypes = 'default' | 'email' | 'password';
+
+type TypesForSelectedInputType = {
+  [name in InputTypes]: {
+    keyboardType: KeyboardTypeOptions | undefined;
+    secureTextEntry?: boolean;
+    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  };
+};
 
 type InputProps = {
-  type?: InputType;
+  type?: InputTypes;
   value: string;
   onChangeText: (value: string) => void;
   placeholder?: string;
@@ -27,14 +35,13 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   style,
 }) => {
-  const inputType = {
+  const inputType: TypesForSelectedInputType = {
     default: {
       keyboardType: 'default',
-      secureTextEntry: false,
     },
     email: {
       keyboardType: 'email-address',
-      secureTextEntry: false,
+      autoCapitalize: 'none',
     },
     password: {
       keyboardType: Platform.select({
@@ -49,10 +56,11 @@ const Input: React.FC<InputProps> = ({
     <View style={[styles.container, style]}>
       <TextInput
         value={value}
+        autoCapitalize={inputType[type].autoCapitalize}
         onChangeText={onChangeText}
         placeholder={placeholder}
         secureTextEntry={inputType[type].secureTextEntry}
-        keyboardType={inputType[type].keyboardType as KeyboardTypeOptions}
+        keyboardType={inputType[type].keyboardType}
         style={styles.inputContainer}
       />
     </View>
