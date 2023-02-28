@@ -32,7 +32,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
     if (emailValidate(email) && password.length > 5) {
       storeCredentials();
-      navigation.navigate('Home');
+      navigation.navigate('Main');
     } else if (!emailValidate(email) && password.length < 6) {
       Alert.alert(
         'Invalid email and password',
@@ -50,7 +50,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <IGLogo style={styles.logo} />
+      <IGLogo size="big" style={styles.logo} />
       <View style={styles.content}>
         <View style={styles.contentTop}>
           <Input
