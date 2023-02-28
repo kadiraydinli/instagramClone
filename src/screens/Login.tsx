@@ -94,6 +94,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               title="Log in with Facebook?"
               leftComponent={<Facebook />}
               onPress={() => {}}
+              style={{ justifyContent: 'center' }}
             />
 
             <Divider title="OR" />
