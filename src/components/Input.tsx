@@ -21,18 +21,22 @@ type TypesForSelectedInputType = {
 };
 
 type InputProps = {
+  inputRef?: React.LegacyRef<TextInput>;
   type?: InputTypes;
   value: string;
   onChangeText: (value: string) => void;
   placeholder?: string;
+  onSubmitEditing?: () => void;
   style?: StyleProp<ViewStyle>;
 };
 
 const Input: React.FC<InputProps> = ({
+  inputRef,
   type = 'default',
   value,
   onChangeText,
   placeholder,
+  onSubmitEditing,
   style,
 }) => {
   const inputType: TypesForSelectedInputType = {
@@ -55,10 +59,12 @@ const Input: React.FC<InputProps> = ({
   return (
     <View style={[styles.container, style]}>
       <TextInput
+        ref={inputRef}
         value={value}
         autoCapitalize={inputType[type].autoCapitalize}
         onChangeText={onChangeText}
         placeholder={placeholder}
+        onSubmitEditing={onSubmitEditing}
         secureTextEntry={inputType[type].secureTextEntry}
         keyboardType={inputType[type].keyboardType}
         style={styles.inputContainer}

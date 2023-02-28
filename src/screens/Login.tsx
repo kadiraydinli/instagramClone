@@ -1,5 +1,13 @@
-import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import {
+  Alert,
+  KeyboardAvoidingView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Keychain from 'react-native-keychain';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -14,6 +22,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const inputRef = useRef<TextInput>(null);
 
   const insets = useSafeAreaInsets();
 
@@ -49,53 +58,60 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <IGLogo size="big" style={styles.logo} />
-      <View style={styles.content}>
-        <View style={styles.contentTop}>
-          <Input
-            type="email"
-            value={email}
-            onChangeText={setEmail}
-            placeholder="Email"
-          />
+    <>
+      <StatusBar backgroundColor={palette.white} />
+      <KeyboardAvoidingView style={styles.container}>
+        <IGLogo size="big" style={styles.logo} />
+        <View style={styles.content}>
+          <View style={styles.contentTop}>
+            <Input
+              type="email"
+              value={email}
+              onChangeText={setEmail}
+              onSubmitEditing={() => inputRef.current?.focus()}
+              placeholder="Email"
+            />
 
-          <Input
-            type="password"
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Password"
-          />
+            <Input
+              inputRef={inputRef}
+              type="password"
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Password"
+            />
 
-          <TextButton
-            title="Forgot password?"
-            onPress={() => {}}
-            style={{ alignSelf: 'flex-end' }}
-          />
+            <TextButton
+              title="Forgot password?"
+              onPress={() => {}}
+              style={{ alignSelf: 'flex-end' }}
+            />
 
-          <Button title="Log in" onPress={login} />
-        </View>
+            <Button title="Log in" onPress={login} />
+          </View>
 
-        <View style={styles.contentBottom}>
-          <TextButton
-            title="Log in with Facebook?"
-            leftComponent={<Facebook />}
-            onPress={() => {}}
-          />
+          <View style={styles.contentBottom}>
+            <TextButton
+              title="Log in with Facebook?"
+              leftComponent={<Facebook />}
+              onPress={() => {}}
+            />
 
-          <Divider title="OR" />
+            <Divider title="OR" />
 
-          <View style={styles.dontAccountTextContainer}>
-            <Text style={styles.dontAccountText}>Don’t have an account? </Text>
-            <TextButton title="Sign up." onPress={() => {}} />
+            <View style={styles.dontAccountTextContainer}>
+              <Text style={styles.dontAccountText}>
+                Don’t have an account?{' '}
+              </Text>
+              <TextButton title="Sign up." onPress={() => {}} />
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={[styles.footer, { marginBottom: insets.bottom }]}>
-        <Text style={styles.footerText}>Instagram of Meta</Text>
-      </View>
-    </View>
+        <View style={[styles.footer, { marginBottom: insets.bottom }]}>
+          <Text style={styles.footerText}>Instagram of Meta</Text>
+        </View>
+      </KeyboardAvoidingView>
+    </>
   );
 };
 
@@ -105,6 +121,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: palette.white,
   },
   logo: {
     marginBottom: spacing.small,
