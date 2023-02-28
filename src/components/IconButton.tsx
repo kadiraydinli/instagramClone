@@ -1,3 +1,10 @@
+import React from 'react';
+import {
+  StyleProp,
+  StyleSheet,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import {
   ArrowLeft,
   Bookmark,
@@ -8,13 +15,7 @@ import {
   More,
   Share,
 } from 'assets/icons';
-import React from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  TouchableOpacity,
-  ViewStyle,
-} from 'react-native';
+import { palette } from 'theme';
 
 const icons = {
   comment: <Comment />,
@@ -23,6 +24,7 @@ const icons = {
   heartSelected: <HeartSelected />,
   share: <Share />,
   bookmark: <Bookmark />,
+  bookmarkSelected: <Bookmark fill={palette.surface} />,
   messenger: <Messenger />,
   arrowLeft: <ArrowLeft />,
 };

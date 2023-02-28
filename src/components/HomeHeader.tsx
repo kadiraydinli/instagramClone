@@ -21,12 +21,15 @@ const HomeHeader: React.FC<HomeHeaderProps> = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: 42,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: palette.white,
     paddingHorizontal: spacing.medium,
     paddingVertical: spacing.extraSmall,
+    borderBottomWidth: 1,
+    borderBottomColor: palette.highEmphasis,
   },
   rightContent: {
     flexDirection: 'row',
