@@ -34,15 +34,25 @@ export type IconTypes = keyof typeof icons;
 interface IconButtonTypes {
   icon: IconTypes;
   onPress: () => void;
+  size?: number;
   style?: StyleProp<ViewStyle>;
 }
 
-const IconButton: React.FC<IconButtonTypes> = ({ icon, onPress, style }) => {
+const IconButton: React.FC<IconButtonTypes> = ({
+  icon,
+  onPress,
+  size,
+  style,
+}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
-      style={[styles.container, style]}>
+      style={[
+        styles.container,
+        size ? { width: size, height: size } : {},
+        style,
+      ]}>
       {icons[icon]}
     </TouchableOpacity>
   );
