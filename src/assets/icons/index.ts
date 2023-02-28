@@ -8,6 +8,7 @@ import ReelsSelected from "./ReelsSelected";
 import More from "./More";
 import Heart from "./Heart";
 import Facebook from "./Facebook";
+import Add from "./Add";
 
 export {
     IGLogo,
@@ -19,5 +20,6 @@ export {
     Reels,
     ReelsSelected,
     More,
-    Facebook
+    Facebook,
+    Add
 };
