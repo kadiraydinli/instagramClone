@@ -1,12 +1,13 @@
 import * as React from 'react';
-import Svg, { SvgProps, Circle } from 'react-native-svg';
+import Svg, { SvgProps, Path } from 'react-native-svg';
 import { palette } from 'theme';
 
 const More = (props: SvgProps) => (
   <Svg width={24} height={24} fill="none" {...props}>
-    <Circle cx={6.5} cy={11.5} r={1.5} fill={palette.surface} />
-    <Circle cx={12} cy={11.5} r={1.5} fill={palette.surface} />
-    <Circle cx={17.5} cy={11.5} r={1.5} fill={palette.surface} />
+    <Path
+      d="M12 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM6 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM18 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      fill={palette.surface}
+    />
   </Svg>
 );
 
