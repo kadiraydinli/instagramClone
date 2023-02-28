@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IGLogo } from 'assets/icons';
-import { spacing } from 'theme';
+import { palette, spacing } from 'theme';
 import IconButton from './IconButton';
 
 type HomeHeaderProps = {};
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: palette.white,
     paddingHorizontal: spacing.medium,
     paddingVertical: spacing.extraSmall,
   },
