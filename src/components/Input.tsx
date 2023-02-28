@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: palette.highEmphasis,
     paddingHorizontal: spacing.medium,
     borderWidth: 0.5,
-    borderColor: palette.surface10,
+    borderColor: palette.black10,
     borderRadius: 5,
   },
   inputContainer: {

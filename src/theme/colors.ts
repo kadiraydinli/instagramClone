@@ -5,8 +5,12 @@ export const palette = {
     primaryButton: "rgb(0, 149, 246)",
     heartSelected: "rgb(255, 48, 64)",
     surface: "#262626",
-    surface10: "rgba(0, 0, 0, 0.1)",
     facebook: "#3797EF",
+
+    black10: "rgba(0, 0, 0, 0.1)",
+    black20: "rgba(0, 0, 0, 0.2)",
+    // black30: "rgba(0, 0, 0, 0.3)",
+    black40: "rgba(0, 0, 0, 0.4)",
 
     primary: "#4192EF",
     secondary: "#E0F1FF",
