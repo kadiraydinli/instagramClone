@@ -1,3 +1,4 @@
 import RootNavigator from "./RootNavigator";
+import BottomNavigator from "./BottomNavigator";
 
-export { RootNavigator };
+export { BottomNavigator, RootNavigator };

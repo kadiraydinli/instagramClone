@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from 'navigation/RootNavigator';
+import { BottomTabParamList } from 'navigation/BottomNavigator';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<BottomTabParamList, 'Reels'>;
 
-const HomeScreen: React.FC<Props> = ({ navigation }) => {
+const ReelsScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Reels Screen</Text>
       <Button title="Back to Login" onPress={() => navigation.pop()} />
     </View>
   );
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default ReelsScreen;
