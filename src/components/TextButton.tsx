@@ -12,6 +12,7 @@ import { palette, spacing } from 'theme';
 type TextButtonProps = {
   title: string;
   onPress: () => void;
+  color?: string;
   leftComponent?: React.ReactNode;
   rightComponent?: React.ReactNode;
   disabled?: boolean;
@@ -21,6 +22,7 @@ type TextButtonProps = {
 const TextButton: React.FC<TextButtonProps> = ({
   title,
   onPress,
+  color = palette.primaryButton,
   leftComponent,
   rightComponent,
   disabled,
@@ -35,7 +37,9 @@ const TextButton: React.FC<TextButtonProps> = ({
       {leftComponent && (
         <View style={styles.leftComponentStyle}>{leftComponent}</View>
       )}
-      <Text style={styles.text}>{title}</Text>
+
+      <Text style={[styles.text, color ? { color } : {}]}>{title}</Text>
+
       {rightComponent && (
         <View style={styles.rightComponentStyle}>{rightComponent}</View>
       )}
@@ -47,14 +51,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: 24,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   leftComponentStyle: { marginRight: spacing.extraSmall },
   rightComponentStyle: { marginLeft: spacing.extraSmall },
-  text: {
-    color: palette.primaryButton,
-  },
+  text: {},
 });
 
 export default TextButton;
