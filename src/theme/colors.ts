@@ -1,6 +1,7 @@
 export const palette = {
     black: "#000000",
     white: "#FFFFFF",
+    gray: "#D9D9D9",
     highEmphasis: "#FAFAFA",
     primaryButton: "rgb(0, 149, 246)",
     heartSelected: "rgb(255, 48, 64)",

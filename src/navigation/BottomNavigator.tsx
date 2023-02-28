@@ -8,6 +8,7 @@ import {
   Search,
   SearchSelected,
 } from 'assets/icons';
+import { ProfileImage } from 'components';
 import {
   AddScreen,
   HomeScreen,
@@ -47,7 +48,7 @@ const BottomNavigator = () => {
       <Tab.Screen
         name="Add"
         component={AddScreen}
-        options={{ tabBarIcon: ({ focused }) => <Add /> }}
+        options={{ tabBarIcon: () => <Add /> }}
       />
       <Tab.Screen
         name="Reels"
@@ -57,7 +58,15 @@ const BottomNavigator = () => {
             focused ? <ReelsSelected /> : <Reels />,
         }}
       />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: () => (
+            <ProfileImage url="https://picsum.photos/2000" size={24} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
