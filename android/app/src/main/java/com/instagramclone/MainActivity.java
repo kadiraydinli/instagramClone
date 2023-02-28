@@ -1,5 +1,7 @@
 package com.instagramclone;
 
+import android.os.Bundle;
+import com.zoontek.rnbootsplash.RNBootSplash;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
@@ -14,6 +16,12 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "instagramClone";
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    RNBootSplash.init(this);
+    super.onCreate(savedInstanceState);
   }
 
   /**

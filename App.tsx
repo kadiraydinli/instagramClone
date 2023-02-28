@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,6 +16,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
 
 import {
   Colors,
@@ -29,7 +30,9 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): JSX.Element {
+RNBootSplash.hide({ fade: true });
+
+function Section({ children, title }: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
