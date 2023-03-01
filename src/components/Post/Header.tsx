@@ -2,15 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IconButton, ProfileImage } from 'components';
 import { palette, spacing } from 'theme';
+import { User } from 'store/User';
 
-interface PostHeaderTypes {}
+interface PostHeaderTypes {
+  user: User;
+}
 
-const PostHeader: React.FC<PostHeaderTypes> = () => {
+const PostHeader: React.FC<PostHeaderTypes> = ({ user }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.7} style={styles.leftContent}>
-        <ProfileImage />
-        <Text style={styles.username}>instagram</Text>
+        <ProfileImage url={user.avatar} />
+        <Text style={styles.username}>{user.username}</Text>
       </TouchableOpacity>
       <IconButton icon="more" onPress={() => {}} />
     </View>

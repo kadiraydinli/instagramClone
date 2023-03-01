@@ -1,17 +1,20 @@
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
+import { PostState } from 'store/Posts';
 import PostContent from './Content';
 import PostFooter from './Footer';
 import PostHeader from './Header';
 
-interface PostTypes {}
+interface PostTypes {
+  item: PostState;
+}
 
-const Post: React.FC<PostTypes> = () => {
+const Post: React.FC<PostTypes> = ({ item }) => {
   return (
     <View style={styles.container}>
-      <PostHeader />
-      <PostContent />
-      <PostFooter />
+      <PostHeader user={item.user} />
+      <PostContent media={item.media} />
+      <PostFooter item={item} />
     </View>
   );
 };

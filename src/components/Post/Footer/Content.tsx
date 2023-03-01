@@ -3,24 +3,34 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { TextButton } from 'components';
 import { palette, spacing } from 'theme';
 
-interface PostFooterContentTypes {}
+interface PostFooterContentTypes {
+  username: string;
+  description: string;
+  likeCount: number;
+  commentCount: number;
+}
 
-const PostFooterContent: React.FC<PostFooterContentTypes> = () => {
+const PostFooterContent: React.FC<PostFooterContentTypes> = ({
+  username,
+  description,
+  likeCount,
+  commentCount,
+}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.7}>
-        <Text style={styles.likeText}>1234 likes</Text>
+        <Text style={styles.likeText}>{likeCount} likes</Text>
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
         <Text style={styles.contentText}>
           <Text onPress={() => {}} style={styles.usernameText}>
-            instagram
+            {username}
           </Text>
-          {'  '}Hello World
+          {` ${description}`}
         </Text>
       </TouchableOpacity>
       <TextButton
-        title="View all 10 comments"
+        title={`View all ${commentCount} comments`}
         color={palette.gray2}
         onPress={() => {}}
         style={{ marginVertical: spacing.tiny }}
