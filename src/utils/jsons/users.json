@@ -1,0 +1,37 @@
+[
+    {
+        "id": "a17a4ac0-1ad8-5c43-e6e3-59f85fe4f7ed",
+        "username": "Dylan_Wehner",
+        "name": "Miss Yvette Cummings",
+        "avatar": "https://images.pexels.com/photos/2132126/pexels-photo-2132126.jpeg",
+        "createdAt": "2023-03-01T04:16:21.098Z"
+    },
+    {
+        "id": "32d32032-5b78-4002-cbb5-b28ec9e786c4",
+        "username": "Evalyn_Will",
+        "name": "Noah Kuvalis",
+        "avatar": "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg",
+        "createdAt": "2023-03-01T12:32:14.211Z"
+    },
+    {
+        "id": "2a57c81c-ad33-6928-35fb-372185e950eb",
+        "username": "Griffin_Corkery43",
+        "name": "Brad Stanton",
+        "avatar": "https://images.pexels.com/photos/11773465/pexels-photo-11773465.jpeg",
+        "createdAt": "2023-03-01T11:59:10.848Z"
+    },
+    {
+        "id": "768a0017-c955-241c-f280-f77d64ddba10",
+        "username": "Kailee.Parisian",
+        "name": "Milton Zulauf",
+        "avatar": "https://images.pexels.com/photos/13899908/pexels-photo-13899908.jpeg",
+        "createdAt": "2023-02-28T21:43:17.874Z"
+    },
+    {
+        "id": "f231ec4b-4281-f5d5-61c1-417ab8214c1e",
+        "username": "Barrett.Okuneva66",
+        "name": "Dan Gorczany",
+        "avatar": "https://images.pexels.com/photos/14454924/pexels-photo-14454924.jpeg",
+        "createdAt": "2023-02-28T15:27:59.212Z"
+    }
+]
