@@ -7,6 +7,7 @@ import ProfileImage from "./ProfileImage";
 import IconButton from "./IconButton";
 import HomeHeader from "./HomeHeader";
 import Post from "./Post";
+import SearchInput from "./SearchInput";
 
 export {
     Input,
@@ -17,5 +18,6 @@ export {
     ProfileImage,
     IconButton,
     HomeHeader,
-    Post
+    Post,
+    SearchInput
 };

@@ -15,6 +15,7 @@ import Bookmark from "./Bookmark";
 import Share from "./Share";
 import Messenger from "./Messenger";
 import ArrowLeft from "./ArrowLeft";
+import InputSearch from "./InputSearch";
 
 export {
     IGLogo,
@@ -34,4 +35,5 @@ export {
     Share,
     Messenger,
     ArrowLeft,
+    InputSearch
 };
