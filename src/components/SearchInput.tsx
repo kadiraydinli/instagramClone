@@ -12,12 +12,14 @@ import { palette, spacing } from 'theme';
 type SearchInputProps = {
   value: string;
   onChangeText: (value: string) => void;
+  onFocus?: () => void;
   style?: StyleProp<ViewStyle>;
 };
 
 const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onChangeText,
+  onFocus,
   style,
 }) => {
   return (
@@ -26,6 +28,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       <TextInput
         value={value}
         onChangeText={onChangeText}
+        onFocus={onFocus}
         placeholder="Search"
         style={styles.input}
       />
@@ -35,7 +38,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    flex: 1,
     height: 36,
     flexDirection: 'row',
     alignItems: 'center',

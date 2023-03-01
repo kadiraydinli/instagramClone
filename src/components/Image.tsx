@@ -19,9 +19,9 @@ const Image: React.FC<ImageTypes> = ({ url, priority, resizeMode, style }) => {
       style={style}
       source={{
         uri: url,
-        priority: priority || FastImage.priority.normal,
+        priority: priority || FastImage.priority.high,
       }}
-      resizeMode={resizeMode || FastImage.resizeMode.contain}
+      resizeMode={resizeMode || undefined}
     />
   );
 };
