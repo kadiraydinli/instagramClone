@@ -8,7 +8,7 @@ interface PostHeaderTypes {}
 const PostHeader: React.FC<PostHeaderTypes> = () => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.leftContent}>
+      <TouchableOpacity activeOpacity={0.7} style={styles.leftContent}>
         <ProfileImage />
         <Text style={styles.username}>instagram</Text>
       </TouchableOpacity>

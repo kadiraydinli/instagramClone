@@ -41,9 +41,12 @@ const CommentInput: React.FC<CommentInputProps> = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    height: 36,
+    alignItems: 'center',
   },
   inputContainer: {
     flex: 1,
+    height: '100%',
     marginHorizontal: spacing.extraSmall,
     marginRight: spacing.medium,
   },
