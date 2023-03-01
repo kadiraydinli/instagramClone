@@ -6,5 +6,16 @@ import Image from "./Image";
 import ProfileImage from "./ProfileImage";
 import IconButton from "./IconButton";
 import HomeHeader from "./HomeHeader";
+import Post from "./Post";
 
-export { Input, Button, Divider, Image, TextButton, ProfileImage, IconButton, HomeHeader };
+export {
+    Input,
+    Button,
+    Divider,
+    Image,
+    TextButton,
+    ProfileImage,
+    IconButton,
+    HomeHeader,
+    Post
+};

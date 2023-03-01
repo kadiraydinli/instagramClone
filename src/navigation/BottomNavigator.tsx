@@ -1,3 +1,4 @@
+import { Platform, StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   Add,
@@ -16,6 +17,7 @@ import {
   ReelsScreen,
   SearchScreen,
 } from 'screens';
+import { palette } from 'theme';
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -28,6 +30,10 @@ export type BottomTabParamList = {
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomNavigator = () => {
+  if (Platform.OS === 'android') {
+    StatusBar.setBarStyle('dark-content');
+    StatusBar.setBackgroundColor(palette.white);
+  }
   return (
     <Tab.Navigator
       screenOptions={{ headerShown: false, tabBarShowLabel: false }}>
