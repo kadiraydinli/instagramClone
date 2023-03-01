@@ -22,7 +22,7 @@ type TextButtonProps = {
 const TextButton: React.FC<TextButtonProps> = ({
   title,
   onPress,
-  color = palette.primaryButton,
+  color = palette.primary,
   leftComponent,
   rightComponent,
   disabled,
