@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   KeyboardTypeOptions,
-  Platform,
   StyleProp,
   StyleSheet,
   TextInput,
@@ -48,10 +47,7 @@ const Input: React.FC<InputProps> = ({
       autoCapitalize: 'none',
     },
     password: {
-      keyboardType: Platform.select({
-        android: 'visible-password',
-        ios: 'default',
-      }),
+      keyboardType: 'default',
       secureTextEntry: true,
     },
   };
