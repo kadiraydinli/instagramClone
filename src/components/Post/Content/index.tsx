@@ -3,6 +3,7 @@ import {
   Dimensions,
   FlatList,
   StyleSheet,
+  TouchableOpacity,
   View,
   ViewToken,
 } from 'react-native';
@@ -35,6 +36,10 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
     setVideoVolumeLevel(open ? 1 : 0);
   };
 
+  const onContentPress = () => {
+    onToggleSound(true);
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -49,7 +54,10 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
           waitForInteraction: true,
         }}
         renderItem={({ item }) => (
-          <View style={styles.item}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={onContentPress}
+            style={styles.item}>
             {item.type === 'image' && (
               <Image
                 url={item.url}
@@ -71,7 +79,7 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
                 <ToggleSound onToggle={onToggleSound} />
               </>
             )}
-          </View>
+          </TouchableOpacity>
         )}
       />
       <Pagination dataLength={media.length} activeIndex={shownMediaIndex} />

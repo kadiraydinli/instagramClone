@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { ProfileImage, TextButton } from 'components';
-import { spacing } from 'theme';
+import { palette, spacing } from 'theme';
 
 type CommentInputProps = {
   value: string;
@@ -27,7 +27,8 @@ const CommentInput: React.FC<CommentInputProps> = ({
         value={value}
         onChangeText={onChangeText}
         placeholder="Add a comment..."
-        style={styles.inputContainer}
+        placeholderTextColor={palette.black20}
+        style={styles.input}
       />
       <View style={styles.emojiContent}>
         <TextButton title="❤️" onPress={() => {}} />
@@ -44,11 +45,12 @@ const styles = StyleSheet.create({
     height: 36,
     alignItems: 'center',
   },
-  inputContainer: {
+  input: {
     flex: 1,
     height: '100%',
     marginHorizontal: spacing.extraSmall,
     marginRight: spacing.medium,
+    color: palette.surface,
   },
   emojiContent: {
     flexDirection: 'row',

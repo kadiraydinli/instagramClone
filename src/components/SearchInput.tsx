@@ -53,6 +53,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           onChangeText={onChangeText}
           onFocus={() => onFocus(true)}
           placeholder="Search"
+          placeholderTextColor={palette.black20}
           style={styles.input}
         />
       </TouchableOpacity>
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     marginLeft: spacing.small,
+    color: palette.surface,
   },
 });
 

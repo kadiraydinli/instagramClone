@@ -60,10 +60,11 @@ const Input: React.FC<InputProps> = ({
         autoCapitalize={inputType[type].autoCapitalize}
         onChangeText={onChangeText}
         placeholder={placeholder}
+        placeholderTextColor={palette.black20}
         onSubmitEditing={onSubmitEditing}
         secureTextEntry={inputType[type].secureTextEntry}
         keyboardType={inputType[type].keyboardType}
-        style={styles.inputContainer}
+        style={styles.input}
       />
     </View>
   );
@@ -79,8 +80,9 @@ const styles = StyleSheet.create({
     borderColor: palette.black10,
     borderRadius: 5,
   },
-  inputContainer: {
+  input: {
     height: '100%',
+    color: palette.surface,
   },
 });
 
