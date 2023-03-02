@@ -9,26 +9,24 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Keychain from 'react-native-keychain';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from 'navigation/RootNavigator';
 import { Button, Divider, Input, TextButton } from 'components';
 import { Facebook, IGLogo } from 'assets/icons';
 import { palette, spacing } from 'theme';
 import { emailValidate } from 'utils';
+import { useAppDispatch } from 'store/store';
+import { setLoginWithEmailPassword } from 'store/Root';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const insets = useSafeAreaInsets();
+  const dispatch = useAppDispatch();
   const inputRef = useRef<TextInput>(null);
 
-  const insets = useSafeAreaInsets();
-
-  const storeCredentials = async () => {
-    await Keychain.setGenericPassword(email, password);
-  };
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const login = () => {
     if (email.length === 0 && password.length === 0) {
@@ -40,8 +38,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     if (emailValidate(email) && password.length > 5) {
-      storeCredentials();
-      navigation.navigate('Main');
+      dispatch(setLoginWithEmailPassword({ email, password }));
     } else if (!emailValidate(email) && password.length < 6) {
       Alert.alert(
         'Invalid email and password',

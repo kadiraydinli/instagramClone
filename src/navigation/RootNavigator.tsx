@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginScreen } from 'screens';
 import users from 'utils/jsons/users.json';
-import { useAppDispatch } from 'store/store';
+import { useAppDispatch, useAppSelector } from 'store/store';
 import { fetchUserById } from 'store/User';
 import BottomNavigator from './BottomNavigator';
 
@@ -15,10 +15,11 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
+  const isLogin = useAppSelector(state => state.root.isLogin);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Burası kullanıcılardan rastgele bir kullanıcıyı login olmuş gibi verilerini çekiyorum
+    // Burası tüm kullanıcılardan rastgele bir kullanıcıyı login olmuş gibi verilerini çekiyorum
     const randomUserId = users[Math.floor(Math.random() * users.length)].id;
     dispatch(fetchUserById(randomUserId));
   }, []);
@@ -28,8 +29,11 @@ const RootNavigator = () => {
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Main" component={BottomNavigator} />
+        {isLogin ? (
+          <Stack.Screen name="Main" component={BottomNavigator} />
+        ) : (
+          <Stack.Screen name="Login" component={LoginScreen} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,15 +1,18 @@
 import React from 'react';
-import RNBootSplash from 'react-native-bootsplash';
 import { Provider } from 'react-redux';
+import RNBootSplash from 'react-native-bootsplash';
+import { PersistGate } from 'redux-persist/integration/react';
 import { RootNavigator } from 'navigation';
-import { store } from 'store/store';
+import { persistor, store } from 'store/store';
 
 RNBootSplash.hide({ fade: true });
 
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <RootNavigator />
+      <PersistGate loading={null} persistor={persistor}>
+        <RootNavigator />
+      </PersistGate>
     </Provider>
   );
 }
