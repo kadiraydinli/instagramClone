@@ -37,9 +37,6 @@ export const RootSlice = createSlice({
             storeCredentials(action.payload.email, action.payload.password);
             state.isLogin = true;
         },
-        setLogin: (state) => {
-            state.isLogin = true;
-        },
         setLogout: (state) => {
             resetStoreCredentials();
             state.isLogin = false;
@@ -50,4 +47,4 @@ export const RootSlice = createSlice({
     },
 });
 
-export const { setLoginWithEmailPassword, setLogin, setLogout, setTheme } = RootSlice.actions;
+export const { setLoginWithEmailPassword, setLogout, setTheme } = RootSlice.actions;
