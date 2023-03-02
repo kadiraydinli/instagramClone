@@ -72,11 +72,12 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
                   resizeMode="cover"
                   volume={videoVolumeLevel}
                   source={{ uri: item.url }}
-                  style={{
-                    ...StyleSheet.absoluteFillObject,
-                  }}
+                  style={{ ...StyleSheet.absoluteFillObject }}
                 />
-                <ToggleSound onToggle={onToggleSound} />
+                <ToggleSound
+                  volumeLevel={videoVolumeLevel}
+                  onToggle={onToggleSound}
+                />
               </>
             )}
           </TouchableOpacity>

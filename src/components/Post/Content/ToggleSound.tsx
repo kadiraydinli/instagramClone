@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SoundOff, SoundOn } from 'assets/icons';
 import { palette, spacing } from 'theme';
 
 type ToggleSoundProps = {
+  volumeLevel: number;
   onToggle: (open: boolean) => void;
 };
 
-const ToggleSound: React.FC<ToggleSoundProps> = ({ onToggle }) => {
+const ToggleSound: React.FC<ToggleSoundProps> = ({ volumeLevel, onToggle }) => {
   const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!open && volumeLevel === 1) setOpen(true);
+  }, [volumeLevel, open]);
 
   const onPress = () => {
     onToggle(!open);
