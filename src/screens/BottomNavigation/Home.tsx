@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { RefreshControl, SafeAreaView, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { FlashList } from '@shopify/flash-list';
 import { BottomTabParamList } from 'navigation/BottomNavigator';
@@ -15,11 +15,16 @@ const HomeScreen: React.FC<Props> = () => {
   const [searchText, setSearchText] = useState<string>('');
   const [isSearchFocus, setIsSearchFocus] = useState<boolean>(false);
 
+  const postsStatus = useAppSelector(state => state.posts.status);
   const posts = useAppSelector(state => state.posts.items);
 
-  useEffect(() => {
+  const getPosts = useCallback(() => {
     dispatch(fetchPosts());
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => getPosts(), []);
+
+  const isLoading = postsStatus === 'loading';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,6 +40,9 @@ const HomeScreen: React.FC<Props> = () => {
         <FlashList
           data={posts}
           keyExtractor={item => item?.id}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getPosts} />
+          }
           renderItem={({ item }) => <Post item={item} />}
           estimatedItemSize={450}
         />
