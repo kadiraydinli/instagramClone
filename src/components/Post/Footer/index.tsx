@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { PostState } from 'store/Posts';
 import { palette, spacing } from 'theme';
@@ -8,27 +8,25 @@ import PostFooterContent from './Content';
 import TimeText from './TimeText';
 
 interface PostFooterTypes {
-  item: PostState;
+  post: PostState;
 }
 
-const PostFooter: React.FC<PostFooterTypes> = ({ item }) => {
+const PostFooter: React.FC<PostFooterTypes> = ({ post }) => {
   const [comment, setComment] = useState<string>('');
   return (
     <View style={styles.container}>
       <PostFooterAction />
       <PostFooterContent
-        username={item.user.username}
-        description={item.description}
-        likeCount={item.likeCount}
-        commentCount={item.commentCount}
+        username={post.user.username}
+        description={post.description}
+        likeCount={post.likeCount}
+        commentCount={post.commentCount}
       />
       <CommentInput value={comment} onChangeText={setComment} />
-      <TimeText time={new Date(item.createdAt)} />
+      <TimeText time={new Date(post.createdAt)} />
     </View>
   );
 };
-
-export default PostFooter;
 
 const styles = StyleSheet.create({
   container: {
@@ -38,3 +36,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.extraSmall,
   },
 });
+
+export default memo(PostFooter);

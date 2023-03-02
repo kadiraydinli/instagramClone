@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -28,7 +28,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const login = () => {
+  const login = useCallback(() => {
     if (email.length === 0 && password.length === 0) {
       Alert.alert(
         'Email and Password',
@@ -52,7 +52,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         'Password must be at least 6 character. Please check!',
       );
     }
-  };
+  }, [email, password]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleProp } from 'react-native';
 import FastImage, {
   ImageStyle,
@@ -26,4 +26,4 @@ const Image: React.FC<ImageTypes> = ({ url, priority, resizeMode, style }) => {
   );
 };
 
-export default Image;
+export default memo(Image);

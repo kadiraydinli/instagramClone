@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { palette, spacing } from 'theme';
 
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Pagination;
+export default memo(Pagination);

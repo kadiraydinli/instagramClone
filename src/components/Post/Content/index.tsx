@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -8,21 +8,26 @@ import {
   ViewToken,
 } from 'react-native';
 import Video from 'react-native-video';
+import { PostState } from 'store/Posts';
 import { Image } from 'components';
 import { Media } from 'store/types';
 import { palette } from 'theme';
 import Pagination from './Pagination';
 import ToggleSound from './ToggleSound';
+import { useAppDispatch, useAppSelector } from 'store/store';
+import { setVideoVolumeLevel } from 'store/UI';
 
 interface PostContentTypes {
-  media: Media[];
+  post: PostState;
 }
 
 const WIDTH = Dimensions.get('window').width;
 
-const PostContent: React.FC<PostContentTypes> = ({ media }) => {
+const PostContent: React.FC<PostContentTypes> = ({ post }) => {
+  const dispatch = useAppDispatch();
+  const viewablePostID = useAppSelector(state => state.ui.viewablePostID);
+  const videoVolumeLevel = useAppSelector(state => state.ui.videoVolumeLevel);
   const [shownMediaIndex, setShownMediaIndex] = useState<number>(0);
-  const [videoVolumeLevel, setVideoVolumeLevel] = useState<number>(0);
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
@@ -32,13 +37,15 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
     [],
   );
 
-  const onToggleSound = (open: boolean) => {
-    setVideoVolumeLevel(open ? 1 : 0);
-  };
+  const onToggleSound = useCallback((open: boolean) => {
+    dispatch(setVideoVolumeLevel(open ? 1 : 0));
+  }, []);
 
-  const onContentPress = () => {
+  const onContentPress = useCallback(() => {
     onToggleSound(true);
-  };
+  }, []);
+
+  const media: Media[] = useMemo(() => post.media, [post]);
 
   return (
     <View style={styles.container}>
@@ -50,7 +57,7 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={{
-          itemVisiblePercentThreshold: 40,
+          itemVisiblePercentThreshold: 50,
           waitForInteraction: true,
         }}
         renderItem={({ item }) => (
@@ -69,6 +76,7 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
               <>
                 <Video
                   repeat
+                  paused={post.id !== viewablePostID}
                   resizeMode="cover"
                   volume={videoVolumeLevel}
                   source={{ uri: item.url }}
@@ -88,8 +96,6 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
   );
 };
 
-export default PostContent;
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -102,3 +108,5 @@ const styles = StyleSheet.create({
     backgroundColor: palette.gray3,
   },
 });
+
+export default memo(PostContent);

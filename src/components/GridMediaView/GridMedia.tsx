@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
 import { Image } from 'components';
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GridMedia;
+export default memo(GridMedia);

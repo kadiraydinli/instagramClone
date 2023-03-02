@@ -39,8 +39,6 @@ const PostFooterContent: React.FC<PostFooterContentTypes> = ({
   );
 };
 
-export default PostFooterContent;
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -62,3 +60,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+
+export default PostFooterContent;

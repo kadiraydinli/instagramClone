@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleProp, StyleSheet } from 'react-native';
 import { ImageStyle } from 'react-native-fast-image';
 import { useAppSelector } from 'store/store';
@@ -25,8 +25,6 @@ const ProfileImage: React.FC<ProfileImageTypes> = ({ url, size, style }) => {
   );
 };
 
-export default ProfileImage;
-
 const styles = StyleSheet.create({
   container: {
     width: 30,
@@ -35,3 +33,5 @@ const styles = StyleSheet.create({
     backgroundColor: palette.gray,
   },
 });
+
+export default memo(ProfileImage);

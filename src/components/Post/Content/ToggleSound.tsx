@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SoundOff, SoundOn } from 'assets/icons';
 import { palette, spacing } from 'theme';
@@ -15,13 +15,14 @@ const ToggleSound: React.FC<ToggleSoundProps> = ({ volumeLevel, onToggle }) => {
     if (!open && volumeLevel === 1) setOpen(true);
   }, [volumeLevel, open]);
 
-  const onPress = () => {
+  const onPress = useCallback(() => {
     onToggle(!open);
     setOpen(!open);
-  };
+  }, [open]);
 
   return (
     <TouchableOpacity
+      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
       activeOpacity={0.7}
       onPress={onPress}
       style={styles.container}>
@@ -32,8 +33,8 @@ const ToggleSound: React.FC<ToggleSoundProps> = ({ volumeLevel, onToggle }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
@@ -45,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ToggleSound;
+export default memo(ToggleSound);

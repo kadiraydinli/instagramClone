@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useAppSelector } from 'store/store';
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GridMediaView;
+export default memo(GridMediaView);

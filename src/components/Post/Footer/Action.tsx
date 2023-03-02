@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { StyleSheet, Vibration, View } from 'react-native';
 import { IconButton } from 'components';
 import { spacing } from 'theme';
@@ -9,10 +9,10 @@ const PostFooterAction: React.FC<PostFooterActionTypes> = () => {
   const [liked, setLiked] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
 
-  const likeOnPress = () => {
+  const likeOnPress = useCallback(() => {
     Vibration.vibrate();
     setLiked(!liked);
-  };
+  }, [liked]);
 
   return (
     <View style={styles.container}>
@@ -32,8 +32,6 @@ const PostFooterAction: React.FC<PostFooterActionTypes> = () => {
   );
 };
 
-export default PostFooterAction;
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -45,3 +43,5 @@ const styles = StyleSheet.create({
     gap: spacing.small,
   },
 });
+
+export default PostFooterAction;

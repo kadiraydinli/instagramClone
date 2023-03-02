@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IconButton, ProfileImage } from 'components';
 import { palette, spacing } from 'theme';
@@ -20,8 +20,6 @@ const PostHeader: React.FC<PostHeaderTypes> = ({ user }) => {
   );
 };
 
-export default PostHeader;
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -42,3 +40,5 @@ const styles = StyleSheet.create({
     color: palette.surface,
   },
 });
+
+export default memo(PostHeader);

@@ -1,12 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { RefreshControl, SafeAreaView, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { FlashList } from '@shopify/flash-list';
+import { FlashList, ViewToken } from '@shopify/flash-list';
 import { BottomTabParamList } from 'navigation/BottomNavigator';
 import { GridMediaView, HomeHeader, Post, SearchInput } from 'components';
-import { palette } from 'theme';
 import { fetchPosts } from 'store/Posts';
+import { setViewablePostID } from 'store/UI';
 import { useAppDispatch, useAppSelector } from 'store/store';
+import { palette } from 'theme';
 
 type Props = NativeStackScreenProps<BottomTabParamList, 'Home'>;
 
@@ -26,6 +33,40 @@ const HomeScreen: React.FC<Props> = () => {
 
   const isLoading = postsStatus === 'loading';
 
+  const searchList = useMemo(
+    () => <GridMediaView searchText={searchText} />,
+    [searchText],
+  );
+
+  const onViewableItemsChanged = useRef(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      viewableItems.forEach(item => {
+        if (item.item && item.isViewable) {
+          dispatch(setViewablePostID(item.item.id));
+        }
+      });
+    },
+  ).current;
+
+  const list = useMemo(
+    () => (
+      <FlashList
+        data={posts}
+        keyExtractor={item => item?.id}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={getPosts} />
+        }
+        renderItem={({ item }) => <Post post={item} />}
+        estimatedItemSize={450}
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={{
+          itemVisiblePercentThreshold: 50,
+        }}
+      />
+    ),
+    [posts, isLoading],
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <HomeHeader />
@@ -34,19 +75,7 @@ const HomeScreen: React.FC<Props> = () => {
         onChangeText={setSearchText}
         onFocus={setIsSearchFocus}
       />
-      {isSearchFocus ? (
-        <GridMediaView searchText={searchText} />
-      ) : (
-        <FlashList
-          data={posts}
-          keyExtractor={item => item?.id}
-          refreshControl={
-            <RefreshControl refreshing={isLoading} onRefresh={getPosts} />
-          }
-          renderItem={({ item }) => <Post item={item} />}
-          estimatedItemSize={450}
-        />
-      )}
+      {isSearchFocus ? searchList : list}
     </SafeAreaView>
   );
 };
