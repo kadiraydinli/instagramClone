@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   StyleProp,
   StyleSheet,
   TextInput,
-  View,
+  TouchableOpacity,
   ViewStyle,
 } from 'react-native';
 import { InputSearch } from 'assets/icons';
@@ -22,17 +22,29 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onFocus,
   style,
 }) => {
+  const inputRef = useRef<TextInput>(null);
+
+  const onPress = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   return (
-    <View style={[styles.container, style]}>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={onPress}
+      style={[styles.container, style]}>
       <InputSearch />
       <TextInput
+        ref={inputRef}
         value={value}
         onChangeText={onChangeText}
         onFocus={onFocus}
         placeholder="Search"
         style={styles.input}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
