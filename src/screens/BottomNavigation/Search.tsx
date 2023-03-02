@@ -1,15 +1,17 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabParamList } from 'navigation/BottomNavigator';
+import { Button } from 'components';
+import { palette, spacing } from 'theme';
 
 type Props = NativeStackScreenProps<BottomTabParamList, 'Search'>;
 
-const SearchScreen: React.FC<Props> = ({ navigation }) => {
+const AddScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Search Screen</Text>
-      <Button title="Back to Login" onPress={() => navigation.pop()} />
+      <Text style={styles.text}>Search Screen</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 };
@@ -19,7 +21,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: spacing.extraLarge,
+  },
+  text: {
+    fontSize: 40,
+    color: palette.surface,
+    marginBottom: 20,
   },
 });
 
-export default SearchScreen;
+export default AddScreen;

@@ -5,7 +5,7 @@ import { BottomTabParamList } from 'navigation/BottomNavigator';
 import { Button } from 'components';
 import { useAppDispatch } from 'store/store';
 import { setLogout } from 'store/Root';
-import { spacing } from 'theme';
+import { palette, spacing } from 'theme';
 
 type Props = NativeStackScreenProps<BottomTabParamList, 'Profile'>;
 
@@ -18,12 +18,8 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Profile Screen</Text>
-      <Button
-        title="Logout"
-        onPress={onLogout}
-        style={{ marginTop: spacing.small }}
-      />
+      <Text style={styles.text}>Profile Screen</Text>
+      <Button title="Logout" onPress={onLogout} />
     </View>
   );
 };
@@ -34,6 +30,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: spacing.extraLarge,
+  },
+  text: {
+    fontSize: 40,
+    color: palette.surface,
+    marginBottom: 20,
   },
 });
 
