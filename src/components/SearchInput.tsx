@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: spacing.small,
     borderRadius: 10,
-    backgroundColor: palette.searchInput,
+    backgroundColor: palette.gray3,
   },
   input: {
     flex: 1,

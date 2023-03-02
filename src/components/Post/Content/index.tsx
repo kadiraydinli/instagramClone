@@ -9,6 +9,7 @@ import {
 import Video from 'react-native-video';
 import { Image } from 'components';
 import { Media } from 'store/types';
+import { palette } from 'theme';
 import Pagination from './Pagination';
 import ToggleSound from './ToggleSound';
 
@@ -48,7 +49,7 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
           waitForInteraction: true,
         }}
         renderItem={({ item }) => (
-          <View style={{ width: WIDTH, height: 200 }}>
+          <View style={styles.item}>
             {item.type === 'image' && (
               <Image
                 url={item.url}
@@ -85,5 +86,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     zIndex: 1,
+  },
+  item: {
+    width: WIDTH,
+    height: 200,
+    backgroundColor: palette.gray3,
   },
 });

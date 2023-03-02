@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: GRID_ITEM_SIZE,
-    backgroundColor: palette.gray,
+    backgroundColor: palette.gray3,
+    margin: 0.5,
   },
 });
 
