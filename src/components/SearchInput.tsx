@@ -88,6 +88,8 @@ const styles = StyleSheet.create({
     height: '100%',
     marginLeft: spacing.small,
     color: palette.surface,
+    padding: 0,
+    margin: 0,
   },
 });
 

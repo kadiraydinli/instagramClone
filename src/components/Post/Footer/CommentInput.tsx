@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.extraSmall,
     marginRight: spacing.medium,
     color: palette.surface,
+    padding: 0,
+    margin: 0,
   },
   emojiContent: {
     flexDirection: 'row',

@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
   input: {
     height: '100%',
     color: palette.surface,
+    padding: 0,
+    margin: 0,
   },
 });
 
