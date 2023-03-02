@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     marginLeft: spacing.small,
+    marginRight: spacing.micro,
     color: palette.surface,
     padding: 0,
     margin: 0,
