@@ -16,6 +16,8 @@ import Share from "./Share";
 import Messenger from "./Messenger";
 import ArrowLeft from "./ArrowLeft";
 import InputSearch from "./InputSearch";
+import SoundOn from "./SoundOn";
+import SoundOff from "./SoundOff";
 
 export {
     IGLogo,
@@ -35,5 +37,7 @@ export {
     Share,
     Messenger,
     ArrowLeft,
-    InputSearch
+    InputSearch,
+    SoundOn,
+    SoundOff
 };

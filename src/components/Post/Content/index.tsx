@@ -10,6 +10,7 @@ import Video from 'react-native-video';
 import { Image } from 'components';
 import { Media } from 'store/types';
 import Pagination from './Pagination';
+import ToggleSound from './ToggleSound';
 
 interface PostContentTypes {
   media: Media[];
@@ -19,6 +20,7 @@ const WIDTH = Dimensions.get('window').width;
 
 const PostContent: React.FC<PostContentTypes> = ({ media }) => {
   const [shownMediaIndex, setShownMediaIndex] = useState<number>(0);
+  const [videoVolumeLevel, setVideoVolumeLevel] = useState<number>(0);
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
@@ -27,6 +29,10 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
     },
     [],
   );
+
+  const onToggleSound = (open: boolean) => {
+    setVideoVolumeLevel(open ? 1 : 0);
+  };
 
   return (
     <View style={styles.container}>
@@ -51,14 +57,18 @@ const PostContent: React.FC<PostContentTypes> = ({ media }) => {
             )}
 
             {item.type === 'video' && (
-              <Video
-                repeat
-                resizeMode="cover"
-                source={{ uri: item.url }}
-                style={{
-                  ...StyleSheet.absoluteFillObject,
-                }}
-              />
+              <>
+                <Video
+                  repeat
+                  resizeMode="cover"
+                  volume={videoVolumeLevel}
+                  source={{ uri: item.url }}
+                  style={{
+                    ...StyleSheet.absoluteFillObject,
+                  }}
+                />
+                <ToggleSound onToggle={onToggleSound} />
+              </>
             )}
           </View>
         )}
