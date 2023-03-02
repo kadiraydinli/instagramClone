@@ -1,4 +1,4 @@
-const emailRegex = /^[a-z0-9.]{1,64}@[a-z0-9.]{1,64}$/i;
+const emailRegex = /^[\w-\.]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
 
 export const emailValidate = (email: string): boolean => {
     return emailRegex.test(email);
