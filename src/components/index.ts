@@ -8,6 +8,7 @@ import IconButton from "./IconButton";
 import HomeHeader from "./HomeHeader";
 import Post from "./Post";
 import SearchInput from "./SearchInput";
+import GridMediaView from "./GridMediaView";
 
 export {
     Input,
@@ -19,5 +20,6 @@ export {
     IconButton,
     HomeHeader,
     Post,
-    SearchInput
+    SearchInput,
+    GridMediaView
 };
