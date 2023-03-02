@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import {
   Keyboard,
   StyleProp,
@@ -27,16 +27,16 @@ const SearchInput: React.FC<SearchInputProps> = ({
 }) => {
   const inputRef = useRef<TextInput>(null);
 
-  const onPress = () => {
+  const onPress = useCallback(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  };
+  }, []);
 
-  const onClosePress = () => {
+  const onClosePress = useCallback(() => {
     onFocus(false);
     Keyboard.dismiss();
-  };
+  }, []);
 
   const isFocused = inputRef.current?.isFocused();
 
