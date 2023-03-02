@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { InputSearch } from 'assets/icons';
 import { palette, spacing } from 'theme';
-import TextButton from './TextButton';
+import { IconButton, TextButton } from 'components';
 
 type SearchInputProps = {
   value: string;
@@ -56,6 +56,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
           placeholderTextColor={palette.black20}
           style={styles.input}
         />
+        {isFocused && value.length > 0 && (
+          <IconButton icon="searchBarX" onPress={() => onChangeText('')} />
+        )}
       </TouchableOpacity>
       {isFocused && <TextButton title="Close" onPress={onClosePress} />}
     </View>
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: spacing.small,
+    paddingRight: spacing.extraSmall,
     borderRadius: 10,
     backgroundColor: palette.gray3,
   },

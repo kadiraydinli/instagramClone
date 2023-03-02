@@ -13,6 +13,7 @@ import {
   HeartSelected,
   Messenger,
   More,
+  SearchBarX,
   Share,
 } from 'assets/icons';
 import { palette } from 'theme';
@@ -27,6 +28,7 @@ const icons = {
   bookmarkSelected: <Bookmark fill={palette.surface} />,
   messenger: <Messenger />,
   arrowLeft: <ArrowLeft />,
+  searchBarX: <SearchBarX />,
 };
 
 export type IconTypes = keyof typeof icons;
@@ -58,8 +60,6 @@ const IconButton: React.FC<IconButtonTypes> = ({
   );
 };
 
-export default IconButton;
-
 const styles = StyleSheet.create({
   container: {
     width: 24,
@@ -68,3 +68,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default IconButton;

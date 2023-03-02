@@ -18,6 +18,7 @@ import ArrowLeft from "./ArrowLeft";
 import InputSearch from "./InputSearch";
 import SoundOn from "./SoundOn";
 import SoundOff from "./SoundOff";
+import SearchBarX from "./SearchBarX";
 
 export {
     IGLogo,
@@ -39,5 +40,6 @@ export {
     ArrowLeft,
     InputSearch,
     SoundOn,
-    SoundOff
+    SoundOff,
+    SearchBarX
 };
