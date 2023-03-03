@@ -69,7 +69,11 @@ const Video: React.FC<VideoTypes> = ({
     setError(true);
   }, []);
 
-  const onPress = useCallback(() => dispatch(setVideoVolumeLevel(1)), []);
+  const onPress = useCallback(() => {
+    if (showVolumeToggle && videoVolumeLevel === 0) {
+      dispatch(setVideoVolumeLevel(1));
+    }
+  }, [showVolumeToggle, videoVolumeLevel]);
 
   const loaderSize = useMemo(
     () => (loaderForSize || 0) / 1.5 || size,
@@ -88,7 +92,7 @@ const Video: React.FC<VideoTypes> = ({
         onError={onError}
         repeat={repeat}
         paused={paused}
-        volume={volume || videoVolumeLevel}
+        volume={volume || (showVolumeToggle ? videoVolumeLevel : 0)}
         resizeMode={resizeMode}
         source={{
           uri: url,
