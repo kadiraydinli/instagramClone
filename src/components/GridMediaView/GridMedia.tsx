@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import Video from 'react-native-video';
-import { Image } from 'components';
+import { Image, Video } from 'components';
 import { MediaType } from 'store/types';
 import { palette } from 'theme';
 import { GRID_ITEM_SIZE } from './constants';
@@ -19,18 +18,14 @@ const GridMedia: React.FC<GridMediaProps> = ({ type, url, onPress }) => {
       onPress={onPress}
       style={styles.container}>
       {type === 'image' && (
-        <Image url={url} style={{ ...StyleSheet.absoluteFillObject }} />
+        <Image
+          url={url}
+          loaderForSize={GRID_ITEM_SIZE}
+          style={{ ...StyleSheet.absoluteFillObject }}
+        />
       )}
       {type === 'video' && (
-        <Video
-          repeat
-          volume={0}
-          resizeMode="cover"
-          source={{ uri: url }}
-          style={{
-            ...StyleSheet.absoluteFillObject,
-          }}
-        />
+        <Video url={url} repeat volume={0} loaderForSize={GRID_ITEM_SIZE} />
       )}
     </TouchableOpacity>
   );

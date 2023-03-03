@@ -3,47 +3,38 @@ import {
   Dimensions,
   FlatList,
   StyleSheet,
-  TouchableOpacity,
   View,
   ViewToken,
 } from 'react-native';
-import Video from 'react-native-video';
 import { PostState } from 'store/Posts';
-import { Image } from 'components';
+import { Image, Video } from 'components';
 import { Media } from 'store/types';
 import { palette } from 'theme';
 import Pagination from './Pagination';
-import ToggleSound from './ToggleSound';
-import { useAppDispatch, useAppSelector } from 'store/store';
-import { setVideoVolumeLevel } from 'store/UI';
+import { useAppSelector } from 'store/store';
 
 interface PostContentTypes {
   post: PostState;
 }
 
 const WIDTH = Dimensions.get('window').width;
+const HEIGHT = 200;
 
 const PostContent: React.FC<PostContentTypes> = ({ post }) => {
-  const dispatch = useAppDispatch();
   const viewablePostID = useAppSelector(state => state.ui.viewablePostID);
-  const videoVolumeLevel = useAppSelector(state => state.ui.videoVolumeLevel);
   const [shownMediaIndex, setShownMediaIndex] = useState<number>(0);
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-      const shownItemIndex = viewableItems[0]?.index;
-      setShownMediaIndex(shownItemIndex || 0);
+      viewableItems.forEach(item => {
+        if (item.item) {
+          const shownItemIndex = item.index;
+          setShownMediaIndex(shownItemIndex || 0);
+        }
+      });
     },
     [],
   );
-
-  const onToggleSound = useCallback((open: boolean) => {
-    dispatch(setVideoVolumeLevel(open ? 1 : 0));
-  }, []);
-
-  const onContentPress = useCallback(() => {
-    onToggleSound(true);
-  }, []);
 
   const media: Media[] = useMemo(() => post.media, [post]);
 
@@ -61,10 +52,7 @@ const PostContent: React.FC<PostContentTypes> = ({ post }) => {
           waitForInteraction: true,
         }}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={onContentPress}
-            style={styles.item}>
+          <View style={styles.item}>
             {item.type === 'image' && (
               <Image
                 url={item.url}
@@ -73,22 +61,15 @@ const PostContent: React.FC<PostContentTypes> = ({ post }) => {
             )}
 
             {item.type === 'video' && (
-              <>
-                <Video
-                  repeat
-                  paused={post.id !== viewablePostID}
-                  resizeMode="cover"
-                  volume={videoVolumeLevel}
-                  source={{ uri: item.url }}
-                  style={{ ...StyleSheet.absoluteFillObject }}
-                />
-                <ToggleSound
-                  volumeLevel={videoVolumeLevel}
-                  onToggle={onToggleSound}
-                />
-              </>
+              <Video
+                repeat
+                showVolumeToggle
+                paused={post.id !== viewablePostID}
+                url={item.url}
+                style={{ ...StyleSheet.absoluteFillObject }}
+              />
             )}
-          </TouchableOpacity>
+          </View>
         )}
       />
       <Pagination dataLength={media.length} activeIndex={shownMediaIndex} />
@@ -99,14 +80,14 @@ const PostContent: React.FC<PostContentTypes> = ({ post }) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 200,
+    height: HEIGHT,
     zIndex: 1,
   },
   item: {
     width: WIDTH,
-    height: 200,
+    height: HEIGHT,
     backgroundColor: palette.gray3,
   },
 });
 
-export default memo(PostContent);
+export default PostContent;

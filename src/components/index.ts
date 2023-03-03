@@ -9,6 +9,8 @@ import HomeHeader from "./HomeHeader";
 import Post from "./Post";
 import SearchInput from "./SearchInput";
 import GridMediaView from "./GridMediaView";
+import LottieAnimation from "./LottieAnimation";
+import Video from "./Video";
 
 export {
     Input,
@@ -21,5 +23,7 @@ export {
     HomeHeader,
     Post,
     SearchInput,
-    GridMediaView
+    GridMediaView,
+    LottieAnimation,
+    Video
 };

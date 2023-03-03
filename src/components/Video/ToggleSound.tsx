@@ -1,24 +1,21 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SoundOff, SoundOn } from 'assets/icons';
 import { palette, spacing } from 'theme';
+import { useAppSelector } from 'store/store';
 
 type ToggleSoundProps = {
-  volumeLevel: number;
-  onToggle: (open: boolean) => void;
+  onToggle: (level: number) => void;
 };
 
-const ToggleSound: React.FC<ToggleSoundProps> = ({ volumeLevel, onToggle }) => {
-  const [open, setOpen] = useState<boolean>(false);
+const SIZE = 24;
 
-  useEffect(() => {
-    if (!open && volumeLevel === 1) setOpen(true);
-  }, [volumeLevel, open]);
+const ToggleSound: React.FC<ToggleSoundProps> = ({ onToggle }) => {
+  const volumeLevel = useAppSelector(state => state.ui.videoVolumeLevel);
 
-  const onPress = useCallback(() => {
-    onToggle(!open);
-    setOpen(!open);
-  }, [open]);
+  const isOpen = volumeLevel === 1;
+
+  const onPress = useCallback(() => onToggle(isOpen ? 0 : 1), [isOpen]);
 
   return (
     <TouchableOpacity
@@ -26,15 +23,15 @@ const ToggleSound: React.FC<ToggleSoundProps> = ({ volumeLevel, onToggle }) => {
       activeOpacity={0.7}
       onPress={onPress}
       style={styles.container}>
-      {open ? <SoundOn /> : <SoundOff />}
+      {isOpen ? <SoundOn /> : <SoundOff />}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: 24,
-    height: 24,
+    width: SIZE,
+    height: SIZE,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',

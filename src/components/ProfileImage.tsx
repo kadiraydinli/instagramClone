@@ -11,11 +11,18 @@ interface ProfileImageTypes {
   style?: StyleProp<ImageStyle>;
 }
 
-const ProfileImage: React.FC<ProfileImageTypes> = ({ url, size, style }) => {
+const SIZE = 30;
+
+const ProfileImage: React.FC<ProfileImageTypes> = ({
+  url,
+  size = SIZE,
+  style,
+}) => {
   const currentUser = useAppSelector(state => state.user);
   return (
     <Image
       url={url || currentUser.user?.avatar || ''}
+      loaderForSize={size}
       style={[
         styles.container,
         size ? { width: size, height: size } : {},
@@ -27,8 +34,8 @@ const ProfileImage: React.FC<ProfileImageTypes> = ({ url, size, style }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 30,
-    height: 30,
+    width: SIZE,
+    height: SIZE,
     borderRadius: 100,
     backgroundColor: palette.gray,
   },
