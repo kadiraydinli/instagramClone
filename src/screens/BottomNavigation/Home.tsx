@@ -19,11 +19,25 @@ type Props = NativeStackScreenProps<BottomTabParamList, 'Home'>;
 
 const HomeScreen: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
+  const postsStatus = useAppSelector(state => state.posts.status);
+  const postItems = useAppSelector(state => state.posts.items);
+
   const [searchText, setSearchText] = useState<string>('');
   const [isSearchFocus, setIsSearchFocus] = useState<boolean>(false);
 
-  const postsStatus = useAppSelector(state => state.posts.status);
-  const posts = useAppSelector(state => state.posts.items);
+  // Kullandığım mockAPI sağlayıcısının pagination özelliği olmadığı localde pagination özelliği geliştirdim.
+  const [page, setPage] = useState<number>(1);
+  const [loadMore, setLoadMore] = useState<boolean>(true);
+
+  // Pagination
+  const posts = useMemo(() => {
+    if (postItems.length) {
+      const pageLimit = 3;
+      const pageCount = Math.ceil(postItems.length / pageLimit);
+      if (pageCount <= page) setLoadMore(false);
+      return postItems.slice(0, pageLimit * page);
+    }
+  }, [postItems, page]);
 
   const getPosts = useCallback(() => {
     dispatch(fetchPosts());
@@ -48,6 +62,10 @@ const HomeScreen: React.FC<Props> = () => {
     },
   ).current;
 
+  const handleLoadMore = useCallback(() => {
+    if (loadMore) setPage(page + 1);
+  }, [page, loadMore]);
+
   const list = useMemo(
     () => (
       <FlashList
@@ -59,9 +77,9 @@ const HomeScreen: React.FC<Props> = () => {
         renderItem={({ item }) => <Post post={item} />}
         estimatedItemSize={450}
         onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={{
-          itemVisiblePercentThreshold: 50,
-        }}
+        viewabilityConfig={{ itemVisiblePercentThreshold: 50 }}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
       />
     ),
     [posts, isLoading],
